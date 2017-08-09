@@ -1,5 +1,7 @@
 package pokecube.pokeplayer.client;
 
+import java.util.UUID;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
@@ -78,7 +80,7 @@ public class ProxyClient extends Proxy
     @SubscribeEvent
     public void renderHand(RenderHandEvent event)
     {
-        IPokemob pokemob = getPokemob(Minecraft.getMinecraft().thePlayer);
+        IPokemob pokemob = getPokemob(PokecubeCore.proxy.getPlayer((UUID) null));
         if (pokemob == null) return;
         event.setCanceled(true);
     }
@@ -86,7 +88,7 @@ public class ProxyClient extends Proxy
     @SubscribeEvent
     public void mouseClickEvent(MouseEvent event)
     {
-        IPokemob pokemob = getPokemob(Minecraft.getMinecraft().thePlayer);
+        IPokemob pokemob = getPokemob(PokecubeCore.proxy.getPlayer((UUID) null));
         if (pokemob != null && event.getButton() == 0 && event.isButtonstate())
         {
             if (GuiScreen.isAltKeyDown())

@@ -1,9 +1,9 @@
 package pokecube.pokeplayer.client.gui;
 
 import java.util.List;
+import java.util.UUID;
 
 import io.netty.buffer.Unpooled;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
@@ -36,7 +36,7 @@ public class GuiAsPokemob extends GuiDisplayPokecubeInfo
     @Override
     public IPokemob[] getPokemobsToDisplay()
     {
-        IPokemob pokemob = PokePlayer.PROXY.getPokemob(minecraft.thePlayer);
+        IPokemob pokemob = PokePlayer.PROXY.getPokemob(PokecubeCore.proxy.getPlayer((UUID) null));
         if (pokemob != null) return new IPokemob[] { pokemob };
         return super.getPokemobsToDisplay();
     }
@@ -44,7 +44,7 @@ public class GuiAsPokemob extends GuiDisplayPokecubeInfo
     @Override
     public IPokemob getCurrentPokemob()
     {
-        IPokemob pokemob = PokePlayer.PROXY.getPokemob(minecraft.thePlayer);
+        IPokemob pokemob = PokePlayer.PROXY.getPokemob(PokecubeCore.proxy.getPlayer((UUID) null));
         if (pokemob == null) return super.getCurrentPokemob();
         return pokemob;
     }
@@ -52,7 +52,7 @@ public class GuiAsPokemob extends GuiDisplayPokecubeInfo
     @Override
     public void pokemobAttack()
     {
-        IPokemob pokemob = PokePlayer.PROXY.getPokemob(minecraft.thePlayer);
+        IPokemob pokemob = PokePlayer.PROXY.getPokemob(PokecubeCore.proxy.getPlayer((UUID) null));
         if (pokemob == null)
         {
             super.pokemobAttack();
@@ -70,7 +70,7 @@ public class GuiAsPokemob extends GuiDisplayPokecubeInfo
             move = MovesUtils.getMoveFromName(pokemob.getMove(moveIndex));
         }
         if (move == null) return;
-        EntityPlayer player = minecraft.thePlayer;
+        EntityPlayer player = PokecubeCore.proxy.getPlayer((UUID) null);
         PacketBuffer buffer = new PacketBuffer(Unpooled.buffer(11));
         buffer.writeByte(PacketDoActions.MOVEUSE);
         if ((move.getAttackCategory() & IMoveConstants.CATEGORY_CONTACT) > 0) range = contactRange;
@@ -97,11 +97,7 @@ public class GuiAsPokemob extends GuiDisplayPokecubeInfo
                 return;
             }
             GuiTeleport.instance().setState(false);
-
-            Minecraft minecraft = (Minecraft) PokecubeCore.getMinecraftInstance();
-            List<TeleDest> locations = PokecubeSerializer.getInstance()
-                    .getTeleports(minecraft.thePlayer.getUniqueID().toString());
-
+            List<TeleDest> locations = PokecubeSerializer.getInstance().getTeleports(player.getUniqueID().toString());
             if (locations.size() > 0)
             {
                 buffer.writeBoolean(true);
@@ -152,7 +148,7 @@ public class GuiAsPokemob extends GuiDisplayPokecubeInfo
 
     boolean isPokemob()
     {
-        IPokemob pokemob = PokePlayer.PROXY.getPokemob(minecraft.thePlayer);
+        IPokemob pokemob = PokePlayer.PROXY.getPokemob(PokecubeCore.proxy.getPlayer((UUID) null));
         return pokemob != null;
     }
 }

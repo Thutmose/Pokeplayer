@@ -237,7 +237,7 @@ public class EventsHandler
         {
             if (event.player == player)
             {
-                for (EntityPlayer player1 : player.worldObj.playerEntities)
+                for (EntityPlayer player1 : player.getEntityWorld().playerEntities)
                 {
                     if (player1 == player) continue;
                     PokeInfo info = PokecubePlayerDataHandler.getInstance().getPlayerData(player1)
