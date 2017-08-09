@@ -30,19 +30,18 @@ import thut.core.common.handlers.PlayerDataHandler;
 
 @Mod( // @formatter:off
         modid = PokePlayer.ID, 
-        name = "Pokecube Mystery Dungeon", 
+        name = Reference.NAME, 
         version = PokePlayer.VERSION, 
-        dependencies = PokePlayer.DEPSTRING, 
-        acceptedMinecraftVersions = "*"
+        dependencies = PokePlayer.DEPSTRING
         )// @formatter:on
 public class PokePlayer
 {
-    public static final String ID          = "pokeplayer";
-    public static final String VERSION     = "@VERSION";
-    public final static String DEPSTRING   = "required-after:pokecube@@POKECUBEVERSION";
-    public final static String UPDATEURL   = "https://gist.githubusercontent.com/Thutmose/4d7320c36696cd39b336/raw/pokeplayer.json";
+    public static final String ID          = Reference.ID;
+    public static final String VERSION     = Reference.VERSION;
+    public final static String DEPSTRING   = Reference.DEPSTRING;
+    public final static String UPDATEURL   = Reference.UPDATEURL;
 
-    @SidedProxy(clientSide = "pokecube.pokeplayer.client.ProxyClient", serverSide = "pokecube.pokeplayer.Proxy")
+    @SidedProxy(clientSide = Reference.CLIENTPROXY, serverSide = Reference.SERVERPROXY)
     public static Proxy        PROXY;
 
     @Instance(ID)
