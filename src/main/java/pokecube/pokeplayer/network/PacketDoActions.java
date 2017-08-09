@@ -99,7 +99,7 @@ public class PacketDoActions implements IMessage, IMessageHandler<PacketDoAction
             GuiAsPokemob.moveIndex = index;
             return;
         }
-        player = ctx.getServerHandler().playerEntity;
+        player = ctx.getServerHandler().player;
         if (channel == MOVEUSE)
         {
             message.handleMoveUse(PokePlayer.PROXY.getPokemob(player), player);
