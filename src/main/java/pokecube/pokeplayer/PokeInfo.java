@@ -15,11 +15,13 @@ import pokecube.core.PokecubeCore;
 import pokecube.core.handlers.PokecubePlayerDataHandler;
 import pokecube.core.interfaces.IPokemob;
 import pokecube.core.interfaces.PokecubeMod;
+import pokecube.core.interfaces.capabilities.AICapWrapper;
 import pokecube.core.items.pokecubes.PokecubeManager;
 import pokecube.core.utils.EntityTools;
 import pokecube.core.utils.PokeType;
 import pokecube.pokeplayer.inventory.InventoryPlayerPokemob;
 import pokecube.pokeplayer.network.PacketTransform;
+import thut.api.entity.ai.IAIMob;
 import thut.core.common.handlers.PlayerDataHandler.PlayerData;
 import thut.lib.Accessor;
 import thut.lib.CompatWrapper;
@@ -48,11 +50,18 @@ public class PokeInfo extends PlayerData
         this.originalHeight = player.height;
         this.originalWidth = player.width;
         this.originalHP = player.getMaxHealth();
+        pokemob.getEntity().setWorld(player.getEntityWorld());
         pokemob.getEntity().getEntityData().setBoolean("isPlayer", true);
         pokemob.getEntity().getEntityData().setString("playerID", player.getUniqueID().toString());
         pokemob.getEntity().getEntityData().setString("oldName", pokemob.getPokemonNickname());
         pokemob.setPokemonNickname(player.getDisplayNameString());
         pokemob.setPokemonOwner(player);
+        pokemob.initAI();
+        IAIMob ai = pokemob.getEntity().getCapability(IAIMob.THUTMOBAI, null);
+        if (ai instanceof AICapWrapper)
+        {
+            ((AICapWrapper) ai).init();
+        }
         save(player);
     }
 
@@ -109,6 +118,7 @@ public class PokeInfo extends PlayerData
         }
         if (pokemob == null) return;
         EntityLivingBase poke = pokemob.getEntity();
+        poke.setWorld(player.getEntityWorld());
         if (!pokemob.getPokemonAIState(IPokemob.TAMED)) pokemob.setPokemonAIState(IPokemob.TAMED, true);
         poke.onUpdate();
         player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(poke.getMaxHealth());
