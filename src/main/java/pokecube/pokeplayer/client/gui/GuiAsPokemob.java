@@ -57,7 +57,7 @@ public class GuiAsPokemob extends GuiDisplayPokecubeInfo
         }
         if (!useMove || pokemob.getAttackCooldown() > 0) return;
         useMove = false;
-        EntityPlayer player = minecraft.thePlayer;
+        EntityPlayer player = minecraft.player;
         Entity target = Tools.getPointedEntity(player, 32);
         Vector3 targetLocation = Tools.getPointedLocation(player, 32);
         boolean sameOwner = false;
