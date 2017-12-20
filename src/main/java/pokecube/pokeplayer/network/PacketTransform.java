@@ -72,6 +72,11 @@ public class PacketTransform implements IMessage, IMessageHandler<PacketTransfor
             {
                 PokeInfo info = PokecubePlayerDataHandler.getInstance().getPlayerData(player).getData(PokeInfo.class);
                 IPokemob pokemob = info.getPokemob(world);
+                if (pokemob == null)
+                {
+                    PokecubeMod.log("Error with pokemob? "+message.data);
+                    return;
+                }
                 float health = message.data.getFloat("H");
                 if (pokemob.getEntity() == null) return;
                 pokemob.getEntity().setHealth(health);
