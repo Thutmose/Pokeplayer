@@ -1,6 +1,7 @@
 package pokecube.pokeplayer.network;
 
 import java.io.IOException;
+import java.util.logging.Level;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
@@ -74,7 +75,7 @@ public class PacketTransform implements IMessage, IMessageHandler<PacketTransfor
                 IPokemob pokemob = info.getPokemob(world);
                 if (pokemob == null)
                 {
-                    PokecubeMod.log("Error with pokemob? "+message.data);
+                    PokecubeMod.log(Level.WARNING, "Error with pokemob? " + message.data);
                     return;
                 }
                 float health = message.data.getFloat("H");
