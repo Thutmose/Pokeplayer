@@ -173,7 +173,7 @@ public class PokeInfo extends PlayerData
     private void setFlying(EntityPlayer player, boolean set)
     {
         if (pokemob == null) return;
-        boolean fly = pokemob.getPokedexEntry().floats() || pokemob.getPokedexEntry().flys() || !set;
+        boolean fly = pokemob.floats() || pokemob.flys() || !set;
         boolean check = set ? !player.capabilities.allowFlying : player.capabilities.allowFlying;
         if (fly && check && player.getEntityWorld().isRemote && !player.capabilities.isCreativeMode)
         {
@@ -185,7 +185,7 @@ public class PokeInfo extends PlayerData
     private void updateFlying(EntityPlayer player)
     {
         if (pokemob == null) return;
-        if (pokemob.getPokedexEntry().floats() || pokemob.getPokedexEntry().flys())
+        if (pokemob.floats() || pokemob.flys())
         {
             player.fallDistance = 0;
         }
@@ -194,7 +194,7 @@ public class PokeInfo extends PlayerData
     private void updateFloating(EntityPlayer player)
     {
         if (pokemob == null) return;
-        if (!player.isSneaking() && pokemob.getPokedexEntry().floats() && !player.capabilities.isFlying)
+        if (!player.isSneaking() && pokemob.floats() && !player.capabilities.isFlying)
         {
             double h = pokemob.getPokedexEntry().preferedHeight;
             Vec3d start = new Vec3d(player.posX, player.posY, player.posZ);

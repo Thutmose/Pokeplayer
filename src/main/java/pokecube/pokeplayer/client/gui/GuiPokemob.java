@@ -11,10 +11,10 @@ import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
@@ -32,6 +32,7 @@ import pokecube.core.events.handlers.EventsHandlerClient;
 import pokecube.core.interfaces.IMoveConstants;
 import pokecube.core.interfaces.IPokemob;
 import pokecube.core.interfaces.PokecubeMod;
+import pokecube.core.interfaces.pokemob.commandhandlers.StanceHandler;
 import pokecube.core.network.pokemobs.PacketPokemobGui;
 import pokecube.pokeplayer.PokePlayer;
 import pokecube.pokeplayer.inventory.ContainerPokemob;
@@ -52,7 +53,7 @@ public class GuiPokemob extends GuiContainer
         public void drawButton(Minecraft mc, int mouseX, int mouseY, float f)
         {
             super.drawButton(mc, mouseX, mouseY, f);
-            if (id == PacketPokemobGui.BUTTONTOGGLESTAY || id == PacketPokemobGui.BUTTONTOGGLESIT)
+            if (id == StanceHandler.BUTTONTOGGLESTAY || id == StanceHandler.BUTTONTOGGLESIT)
             {
                 PokedexEntry entry = Database.getEntry("eevee");
                 IPokemob renderMob = EventsHandlerClient.getRenderMob(entry, PokecubeCore.proxy.getWorld());
@@ -60,7 +61,7 @@ public class GuiPokemob extends GuiContainer
                 {
                     // No Eevee found
                     ResourceLocation texture;
-                    if (id == PacketPokemobGui.BUTTONTOGGLESTAY)
+                    if (id == StanceHandler.BUTTONTOGGLESTAY)
                     {
                         if (pokemob.getPokemonAIState(IMoveConstants.STAYING))
                         {
@@ -112,7 +113,7 @@ public class GuiPokemob extends GuiContainer
                 if ((o = RenderPokemobs.getInstance().getRenderer(entry)) instanceof RenderAdvancedPokemobModel)
                 {
                     RenderAdvancedPokemobModel<?> render = (RenderAdvancedPokemobModel<?>) o;
-                    if (id == PacketPokemobGui.BUTTONTOGGLESIT)
+                    if (id == StanceHandler.BUTTONTOGGLESIT)
                     {
                         if (pokemob.getPokemonAIState(IMoveConstants.SITTING))
                         {
