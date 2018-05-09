@@ -113,7 +113,7 @@ public class GuiPokemob extends GuiContainer
                 if ((o = RenderPokemobs.getInstance().getRenderer(entry)) instanceof RenderAdvancedPokemobModel)
                 {
                     RenderAdvancedPokemobModel<?> render = (RenderAdvancedPokemobModel<?>) o;
-                    if (id == StanceHandler.BUTTONTOGGLESIT)
+                    if (id == StanceHandler.BUTTONTOGGLESTAY)
                     {
                         if (pokemob.getPokemonAIState(IMoveConstants.SITTING))
                         {
@@ -216,7 +216,6 @@ public class GuiPokemob extends GuiContainer
 
             GL11.glRotatef(-135F, 0.0F, 1.0F, 0.0F);
             GL11.glRotatef(-(float) Math.atan(f5 / 40F) * 20F, 1.0F, 0.0F, 0.0F);
-            GL11.glTranslatef(0.0F, (float) entity.getYOffset(), 0.0F);
             if (zRenderAngle != 0)
             {
                 entity.rotationYaw = 0;
