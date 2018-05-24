@@ -3,6 +3,7 @@ package pokecube.pokeplayer.client.gui;
 import java.util.UUID;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import pokecube.core.PokecubeCore;
 import pokecube.core.client.gui.GuiDisplayPokecubeInfo;
@@ -81,7 +82,7 @@ public class GuiAsPokemob extends GuiDisplayPokecubeInfo
                 return;
             }
         }
-        if (target != null && !sameOwner)
+        if (target != null && !sameOwner && target instanceof EntityLivingBase)
         {
             PacketCommand.sendCommand(pokemob, Command.ATTACKENTITY, new AttackEntityHandler(target.getEntityId()));
         }

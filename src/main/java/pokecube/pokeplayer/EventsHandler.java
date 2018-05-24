@@ -36,6 +36,7 @@ public class EventsHandler
     {
         EventsHandler.proxy = proxy;
         MinecraftForge.EVENT_BUS.register(this);
+        PokecubeCore.MOVE_BUS.register(this);
     }
 
     @SubscribeEvent
