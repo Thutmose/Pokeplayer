@@ -1,6 +1,3 @@
 {
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "pokeplayer:blocks/poketransformer"
-    }
+    "parent": "block/poketransformer_up"
 }
