@@ -59,10 +59,17 @@ public class EventsHandler
     @SubscribeEvent
     public void onPlayerTick(TickEvent.PlayerTickEvent event)
     {
+    	IPokemob pokemob = proxy.getPokemob(event.player);
+    	pokemob.getEntity().addedToChunk = true;
         if (event.phase == Phase.END)
         {
             if (event.player.getHealth() <= 0) { return; }
-            proxy.updateInfo(event.player);
+            event.player.addedToChunk = true;
+            pokemob.getEntity().addedToChunk = true;
+            //if (pokemob != null) {
+            //	checkEvolution(pokemob);
+            //}
+            proxy.updateInfo(event.player);	
         }
     }
 
