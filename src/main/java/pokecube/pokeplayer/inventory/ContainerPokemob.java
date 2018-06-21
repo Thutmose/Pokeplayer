@@ -60,15 +60,15 @@ public class ContainerPokemob extends Container
 				return PokecubeItems.isValidHeldItem(stack);
 			}
 		    
-			@Override
-            public void onPickupFromSlot(EntityPlayer playerIn, ItemStack stack)
+            @Override
+            public ItemStack onTake(EntityPlayer playerIn, ItemStack stack)
             {
                 ItemStack old = getStack();
-                super.onPickupFromSlot(playerIn, stack);
                 if(FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER)
                 {
                     e.getPokedexEntry().onHeldItemChange(stack, old, e);
                 }
+                return super.onTake(playerIn, stack);
             }
 
 			/**

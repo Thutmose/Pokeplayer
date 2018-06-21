@@ -36,6 +36,7 @@ public class EventsHandler
     {
         EventsHandler.proxy = proxy;
         MinecraftForge.EVENT_BUS.register(this);
+        PokecubeCore.MOVE_BUS.register(this);
     }
 
     @SubscribeEvent
@@ -46,7 +47,7 @@ public class EventsHandler
         if (event.getEntityPlayer().isSneaking())
         {
             EntityInteractSpecific evt = new EntityInteractSpecific(event.getEntityPlayer(), event.getHand(),
-                    event.getItemStack(), pokemob.getEntity(), new Vec3d(0, 0, 0));
+                    pokemob.getEntity(), new Vec3d(0, 0, 0));
             PokecubeCore.instance.events.interactEvent(evt);
             PokeInfo info = PokecubePlayerDataHandler.getInstance().getPlayerData(event.getEntityPlayer())
                     .getData(PokeInfo.class);
@@ -58,10 +59,17 @@ public class EventsHandler
     @SubscribeEvent
     public void onPlayerTick(TickEvent.PlayerTickEvent event)
     {
+    	IPokemob pokemob = proxy.getPokemob(event.player);
+    	pokemob.getEntity().addedToChunk = true;
         if (event.phase == Phase.END)
         {
             if (event.player.getHealth() <= 0) { return; }
-            proxy.updateInfo(event.player);
+            event.player.addedToChunk = true;
+            pokemob.getEntity().addedToChunk = true;
+            //if (pokemob != null) {
+            //	checkEvolution(pokemob);
+            //}
+            proxy.updateInfo(event.player);	
         }
     }
 
