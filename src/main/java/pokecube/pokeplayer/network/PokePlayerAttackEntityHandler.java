@@ -60,7 +60,7 @@ public class PokePlayerAttackEntityHandler implements IMobCommandHandler
                 pokemob.getEntity().setAttackTarget((EntityLivingBase) target);
                 if (target instanceof EntityLiving) ((EntityLiving) target).setAttackTarget(pokemob.getEntity());
                 //Checks if within range
-                float dist = target.getDistanceToEntity(pokemob.getEntity());
+                float dist = target.getDistance(pokemob.getEntity());
                 if(dist < PokecubeMod.core.getConfig().combatDistance) {
                 	pokemob.executeMove(target, Vector3.getNewVector().set(target), dist);
                 }

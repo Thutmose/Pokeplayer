@@ -231,7 +231,7 @@ public class GuiPokemob extends GuiContainer
             int j1 = i % 65536;
             int k1 = i / 65536;
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j1 / 1.0F, k1 / 1.0F);
-            Minecraft.getMinecraft().getRenderManager().doRenderEntity(entity, 0, -0.123456, 0, 0, 1.5F, false);
+            Minecraft.getMinecraft().getRenderManager().renderEntity(entity, 0, -0.123456, 0, 0, 1.5F, false);
             GL11.glPopMatrix();
             RenderHelper.disableStandardItemLighting();
             GL11.glDisable(GL12.GL_RESCALE_NORMAL);
