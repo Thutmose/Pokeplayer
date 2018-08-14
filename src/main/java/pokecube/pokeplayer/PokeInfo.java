@@ -16,6 +16,7 @@ import pokecube.core.handlers.PokecubePlayerDataHandler;
 import pokecube.core.interfaces.IPokemob;
 import pokecube.core.interfaces.PokecubeMod;
 import pokecube.core.interfaces.capabilities.AICapWrapper;
+import pokecube.core.interfaces.pokemob.ai.GeneralStates;
 import pokecube.core.items.pokecubes.PokecubeManager;
 import pokecube.core.utils.EntityTools;
 import pokecube.core.utils.PokeType;
@@ -119,7 +120,7 @@ public class PokeInfo extends PlayerData
         if (pokemob == null) return;
         EntityLivingBase poke = pokemob.getEntity();
         poke.setWorld(player.getEntityWorld());
-        if (!pokemob.getPokemonAIState(IPokemob.TAMED)) pokemob.setPokemonAIState(IPokemob.TAMED, true);
+        if (!pokemob.getGeneralState(GeneralStates.TAMED)) pokemob.setGeneralState(GeneralStates.TAMED, true);
         poke.onUpdate();
         player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(poke.getMaxHealth());
         if (player.capabilities.isCreativeMode)
