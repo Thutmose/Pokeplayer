@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -100,6 +101,6 @@ public class PokePlayer
     @SubscribeEvent
     public void registerTiles(RegistryEvent.Register<Block> evt)
     {
-        GameRegistry.registerTileEntity(TileEntityTransformer.class, "poketransformer");
+        GameRegistry.registerTileEntity(TileEntityTransformer.class, new ResourceLocation(ID, "poketransformer"));
     }
 }

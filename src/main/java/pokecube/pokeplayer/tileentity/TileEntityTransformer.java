@@ -25,7 +25,7 @@ import thut.lib.CompatWrapper;
 
 public class TileEntityTransformer extends TileEntityOwnable implements ITickable
 {
-    ItemStack stack    = CompatWrapper.nullStack;
+    ItemStack stack    = ItemStack.EMPTY;
     int[]     nums     = {};
     int       lvl      = 5;
     boolean   random   = false;
@@ -45,12 +45,12 @@ public class TileEntityTransformer extends TileEntityOwnable implements ITickabl
             if (!CompatWrapper.isValid(stack) && PokecubeManager.isFilled(player.getHeldItemMainhand()))
             {
                 setStack(player.getHeldItemMainhand());
-                player.inventory.setInventorySlotContents(player.inventory.currentItem, CompatWrapper.nullStack);
+                player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
             }
             else
             {
                 Tools.giveItem(player, stack);
-                stack = CompatWrapper.nullStack;
+                stack = ItemStack.EMPTY;
             }
         }
     }
@@ -66,7 +66,7 @@ public class TileEntityTransformer extends TileEntityOwnable implements ITickabl
             if (pokemob != null) PokePlayer.PROXY.setPokemob(player, pokemob);
             if (pokemob != null)
             {
-                stack = CompatWrapper.nullStack;
+                stack = ItemStack.EMPTY;
                 stepTick = 50;
             }
             EventsHandler.sendUpdate(player);
@@ -104,7 +104,7 @@ public class TileEntityTransformer extends TileEntityOwnable implements ITickabl
             player.capabilities.isFlying = false;
             player.sendPlayerAbilities();
             PokePlayer.PROXY.setPokemob(player, null);
-            stack = CompatWrapper.nullStack;
+            stack = ItemStack.EMPTY;
             EventsHandler.sendUpdate(player);
             return;
         }
@@ -144,7 +144,7 @@ public class TileEntityTransformer extends TileEntityOwnable implements ITickabl
         if (tagCompound.hasKey("stack"))
         {
             NBTTagCompound tag = tagCompound.getCompoundTag("stack");
-            stack = CompatWrapper.fromTag(tag);
+            stack = new ItemStack(tag);
         }
         if (tagCompound.hasKey("nums")) nums = tagCompound.getIntArray("nums");
         if (tagCompound.hasKey("lvl")) lvl = tagCompound.getInteger("lvl");

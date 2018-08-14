@@ -25,7 +25,6 @@ import pokecube.pokeplayer.network.PacketTransform;
 import thut.api.entity.ai.IAIMob;
 import thut.core.common.handlers.PlayerDataHandler.PlayerData;
 import thut.lib.Accessor;
-import thut.lib.CompatWrapper;
 
 public class PokeInfo extends PlayerData
 {
@@ -260,7 +259,7 @@ public class PokeInfo extends PlayerData
     @Override
     public void readFromNBT(NBTTagCompound tag)
     {
-        stack = CompatWrapper.fromTag(tag);
+        stack = new ItemStack(tag);
         originalHeight = tag.getFloat("h");
         originalWidth = tag.getFloat("w");
         originalHP = tag.getFloat("hp");
