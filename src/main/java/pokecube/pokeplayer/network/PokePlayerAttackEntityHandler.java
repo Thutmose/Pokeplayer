@@ -16,7 +16,7 @@ import pokecube.core.interfaces.pokemob.IHasCommands.IMobCommandHandler;
 import pokecube.core.moves.MovesUtils;
 import thut.api.maths.Vector3;
 
-//Wrapper to ensure player attacks entity as pokeplayer
+// Wrapper to ensure player attacks entity as pokeplayer
 public class PokePlayerAttackEntityHandler implements IMobCommandHandler
 {
     public int targetId;
@@ -59,10 +59,11 @@ public class PokePlayerAttackEntityHandler implements IMobCommandHandler
                 pokemob.displayMessageToOwner(mess);
                 pokemob.getEntity().setAttackTarget((EntityLivingBase) target);
                 if (target instanceof EntityLiving) ((EntityLiving) target).setAttackTarget(pokemob.getEntity());
-                //Checks if within range
+                // Checks if within range
                 float dist = target.getDistance(pokemob.getEntity());
-                if(dist < PokecubeMod.core.getConfig().combatDistance) {
-                	pokemob.executeMove(target, Vector3.getNewVector().set(target), dist);
+                if (dist < PokecubeMod.core.getConfig().combatDistance)
+                {
+                    pokemob.executeMove(target, Vector3.getNewVector().set(target), dist);
                 }
             }
         }
@@ -78,6 +79,18 @@ public class PokePlayerAttackEntityHandler implements IMobCommandHandler
     public void readFromBuf(ByteBuf buf)
     {
         targetId = buf.readInt();
+    }
+
+    @Override
+    public IMobCommandHandler setFromOwner(boolean owner)
+    {
+        return this;
+    }
+
+    @Override
+    public boolean fromOwner()
+    {
+        return false;
     }
 
 }

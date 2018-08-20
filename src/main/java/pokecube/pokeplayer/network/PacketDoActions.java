@@ -26,47 +26,28 @@ import pokecube.core.interfaces.pokemob.commandhandlers.MoveToHandler;
 import pokecube.core.interfaces.pokemob.commandhandlers.StanceHandler;
 import pokecube.core.interfaces.pokemob.commandhandlers.SwapMovesHandler;
 import pokecube.core.interfaces.pokemob.commandhandlers.TeleportHandler;
+import pokecube.core.network.pokemobs.PacketCommand.DefaultHandler;
 
 public class PacketDoActions implements IMessage, IMessageHandler<PacketDoActions, IMessage>
 {
-	public static final Map<Command, Class<? extends IMobCommandHandler>> COMMANDHANDLERS = Maps.newHashMap();
-	
+    public static final Map<Command, Class<? extends IMobCommandHandler>> COMMANDHANDLERS = Maps.newHashMap();
+
     // Register default command handlers
     static
     {
         // Only populate this if someone else hasn't override in.
         if (PacketDoActions.COMMANDHANDLERS.isEmpty())
         {
-        	PacketDoActions.COMMANDHANDLERS.put(Command.ATTACKENTITY, PokePlayerAttackEntityHandler.class);
-        	PacketDoActions.COMMANDHANDLERS.put(Command.ATTACKLOCATION, AttackLocationHandler.class);
-        	PacketDoActions.COMMANDHANDLERS.put(Command.ATTACKNOTHING, AttackNothingHandler.class);
-        	PacketDoActions.COMMANDHANDLERS.put(Command.CHANGEFORM, ChangeFormHandler.class);
-        	PacketDoActions.COMMANDHANDLERS.put(Command.CHANGEMOVEINDEX, MoveIndexHandler.class);
-        	PacketDoActions.COMMANDHANDLERS.put(Command.MOVETO, MoveToHandler.class);
-        	PacketDoActions.COMMANDHANDLERS.put(Command.STANCE, StanceHandler.class);
-        	PacketDoActions.COMMANDHANDLERS.put(Command.SWAPMOVES, SwapMovesHandler.class);
-        	PacketDoActions.COMMANDHANDLERS.put(Command.TELEPORT, TeleportHandler.class);
+            PacketDoActions.COMMANDHANDLERS.put(Command.ATTACKENTITY, PokePlayerAttackEntityHandler.class);
+            PacketDoActions.COMMANDHANDLERS.put(Command.ATTACKLOCATION, AttackLocationHandler.class);
+            PacketDoActions.COMMANDHANDLERS.put(Command.ATTACKNOTHING, AttackNothingHandler.class);
+            PacketDoActions.COMMANDHANDLERS.put(Command.CHANGEFORM, ChangeFormHandler.class);
+            PacketDoActions.COMMANDHANDLERS.put(Command.CHANGEMOVEINDEX, MoveIndexHandler.class);
+            PacketDoActions.COMMANDHANDLERS.put(Command.MOVETO, MoveToHandler.class);
+            PacketDoActions.COMMANDHANDLERS.put(Command.STANCE, StanceHandler.class);
+            PacketDoActions.COMMANDHANDLERS.put(Command.SWAPMOVES, SwapMovesHandler.class);
+            PacketDoActions.COMMANDHANDLERS.put(Command.TELEPORT, TeleportHandler.class);
         }
-    }
-
-    private static class DefaultHandler implements IMobCommandHandler
-    {
-
-        @Override
-        public void handleCommand(IPokemob pokemob) throws Exception
-        {
-        }
-
-        @Override
-        public void writeToBuf(ByteBuf buf)
-        {
-        }
-
-        @Override
-        public void readFromBuf(ByteBuf buf)
-        {
-        }
-
     }
 
     int                entityId;
